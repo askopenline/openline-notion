@@ -3,17 +3,17 @@
   "badges": [
     {
       "slug": "badge-read-last-activity",
-      "label": "Read & Last Activity",
+      "label": "Check & Last Activity",
       "color": "navy",
-      "icon": "eye",
-      "page": "Executive / Read Function"
+      "icon": "check",
+      "page": "Executive / Check Function"
     },
     {
       "slug": "badge-quick-actions",
       "label": "Quick Actions",
       "color": "iris",
       "icon": "bolt",
-      "page": "Executive / Read Function"
+      "page": "Executive / Check Function"
     },
     {
       "slug": "badge-strategic-tasks",
