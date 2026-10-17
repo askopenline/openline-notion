@@ -1,6 +1,7 @@
-# Openline OS Badge Generator
+<!-- OPENLINE-GUIDE-VISUAL -->
+![OS Visual System: company resource guide](https://raw.githubusercontent.com/askopenline/openline-notion/main/.github/assets/guide-header.png)
 
-> Openline company documentation: maintained in [askopenline/openline-notion](https://github.com/askopenline/openline-notion). See the [repository README](../README.md) for ownership, scope, and release boundaries.
+# Openline OS Badge Generator
 
 The shared renderer and manifest for Openline OS navigation badges and related visual assets. Maintained as part of the official [Openline public visual library](https://github.com/askopenline/openline-notion).
 
@@ -37,3 +38,8 @@ https://raw.githubusercontent.com/askopenline/openline-notion/main/os-nav/<slug>
 For an intentional Notion refresh, pin the reviewed full commit SHA and replace the affected image reference when necessary. GitHub delivery and Notion's image proxy can both cache an older image, so overwriting a filename is not a guarantee of an immediate workspace-wide refresh.
 
 This repository copy does not edit existing Notion pages or earlier image URLs. Public hosting is appropriate only for assets reviewed for disclosure; never move private captures here just to bypass an authentication requirement.
+
+<!-- OPENLINE-GUIDE-NAV -->
+## Company reference
+
+This guide belongs to [Openline OS Visual System](https://github.com/askopenline/openline-notion), maintained by Openline. Return to the [project overview](../README.md) for the broader system, current company links, and release context.
