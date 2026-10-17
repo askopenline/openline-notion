@@ -1,72 +1,39 @@
-# Openline OS — Badge System
+# Openline OS Badge Generator
 
-Sustainable, replicable generator for the `os-nav/` pill badges used across the
-Openline OS Notion pages (Executive, Production, etc.).
+> Openline company documentation: maintained in [askopenline/openline-notion](https://github.com/askopenline/openline-notion). See the [repository README](../README.md) for ownership, scope, and release boundaries.
 
-## Why
+The shared renderer and manifest for Openline OS navigation badges and related visual assets. Maintained as part of the official [Openline public visual library](https://github.com/askopenline/openline-notion).
 
-Badges are **generated programmatically**, not hand-designed or AI-generated.
-That means:
+## Files and requirements
 
-- Perfectly consistent style (color, shape, font, spacing) every time
-- No hallucinated text — the label is rendered from a string
-- One source of truth: edit [`badges.json`](./badges.json), re-run, commit
-- Re-render **every** badge at once if the style ever changes
+| File | Purpose |
+| --- | --- |
+| [`badges.json`](badges.json) | Labels, slugs, colors, icons, and presets |
+| [`gen_badge.py`](gen_badge.py) | Image renderer |
+| [`build_all.py`](build_all.py) | Batch build |
 
-## Files
+Use Python 3, Pillow, and the font expected by `gen_badge.py`. Check the renderer's font paths on a new workstation; copying the repository does not install system fonts.
 
-| File            | Purpose                                                        |
-| --------------- | ------------------------------------------------------------- |
-| `badges.json`   | Source of truth — every badge (slug, label, color, icon, page) |
-| `gen_badge.py`  | Renderer — draws one pill badge (shape, icon, text)           |
-| `build_all.py`  | Reads `badges.json` and renders all badges                    |
-| `preview.png`   | Contact sheet of the current badge set                        |
+## Generate and review
 
-## Regenerate everything
+From the repository root:
 
-```bash
-cd badge-system
-python3 build_all.py --dir ../os-nav   # writes PNGs straight into os-nav/
-git add ../os-nav/*.png preview.png
-git commit -m "Regenerate badges"
-git push
+```sh
+python3 badge-system/build_all.py --dir os-nav
 ```
 
-Because pages reference badges by stable slug via raw GitHub URL
-(`https://raw.githubusercontent.com/paulfxyz/openline-notion/main/os-nav/<slug>.png`),
-committing new PNGs over the old ones updates **every page at once** — no Notion
-edits required for a pure restyle.
+The manifest includes the badge list and, where present, additional asset presets. Review the generated PNGs for correct labels, dimensions, alpha, contrast, icon alignment, and consistency before committing.
 
-## Add a new badge
+Add or edit entries in `badges.json`, then regenerate rather than hand-editing output images. Preserve stable slugs unless the consuming Notion blocks will be updated.
 
-1. Add an entry to `badges.json`:
-   ```json
-   { "slug": "badge-my-thing", "label": "My Thing", "color": "navy", "icon": "eye", "page": "..." }
-   ```
-2. `python3 build_all.py --dir ../os-nav`
-3. Reference it in Notion:
-   `![](https://raw.githubusercontent.com/paulfxyz/openline-notion/main/os-nav/badge-my-thing.png)`
+## Public embedding
 
-## Style spec
+Use URLs under the official company repository for newly configured public assets:
 
-- Rounded pill, 34px tall, transparent background (RGBA PNG)
-- Solid fill, bold uppercase white text with letter-spacing
-- Small white line-icon on the left
-- Rendered at 3× then downsampled (Lanczos) for crisp edges
+```text
+https://raw.githubusercontent.com/askopenline/openline-notion/main/os-nav/<slug>.png
+```
 
-### Palette (sampled from the original badges)
+For an intentional Notion refresh, pin the reviewed full commit SHA and replace the affected image reference when necessary. GitHub delivery and Notion's image proxy can both cache an older image, so overwriting a filename is not a guarantee of an immediate workspace-wide refresh.
 
-`navy #312E81` · `gold #B47809` · `purple #86198F` · `emerald #047857` ·
-`cyan #0E7490` · `violet #6D28D9` · `slate #334155` · `rose #9F1239` ·
-`teal #0F766E` · `orange #C2410C` · `blue #1D4ED8` · `pink #BE185D`
-(or pass any `#hex`)
-
-### Icons
-
-`eye · bolt · gear · bulb · dollar · search · mail · globe · building ·
-rocket · code · plug · puzzle · swap · file · none`
-
-## Requirements
-
-`Pillow` and the Liberation Sans Bold font
-(`/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf`).
+This repository copy does not edit existing Notion pages or earlier image URLs. Public hosting is appropriate only for assets reviewed for disclosure; never move private captures here just to bypass an authentication requirement.
